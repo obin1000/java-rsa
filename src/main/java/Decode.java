@@ -1,5 +1,7 @@
 package main.java;
 
+import rsa.java.Rsa;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,9 +9,12 @@ public class Decode extends JPanel {
 
     private JTextField Ninput, Einput, Cinput, MessageUnencrypted;
     private JLabel Dlab;
+    private Rsa rsa;
 
 
     public Decode() {
+        rsa = new Rsa();
+
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JLabel title = new JLabel("Decode");
@@ -84,7 +89,8 @@ public class Decode extends JPanel {
             JOptionPane.showMessageDialog(this, "E cannot be smaller than 2");
             return;
         }
-        showD(E);
+        rsa.calcD(N,E);
+        showD(rsa.getD());
     }
 
     public void CMButtonPressed() {
