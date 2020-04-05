@@ -21,10 +21,13 @@ public class Encode extends JPanel {
         JLabel NLabel = new JLabel("Give me the N:");
         NInput = new JTextField("123");
         JButton NButton = new JButton("Step 1: Generate P and Q");
+
         JLabel Pis = new JLabel("P is");
         Plab = new JLabel("0");
+
         JLabel Qis = new JLabel("Q is");
         Qlab = new JLabel("0");
+
         JLabel PQTimeLabel = new JLabel("Amount of time busy finding p and q (Nanoseconds):");
         PQTime = new JLabel("0");
 
@@ -90,8 +93,8 @@ public class Encode extends JPanel {
             JOptionPane.showMessageDialog(this,"Invalid N provided");
             return;
         }
-        if (N == 0){
-            JOptionPane.showMessageDialog(this,"N Cannot be 0");
+        if (N < 2){
+            JOptionPane.showMessageDialog(this,"N cannot be smaller than 2");
             return;
         }
 
