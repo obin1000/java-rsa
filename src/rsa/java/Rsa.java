@@ -8,7 +8,6 @@ public class Rsa {
     private long q;
     private long e;
     private long d;
-    private long n;
 
     public long getP() {
         return p;
@@ -76,7 +75,6 @@ public class Rsa {
 
     public void calcD(long n, long e) {
         calcPQ(n);
-        this.n = n;
         BigInteger bigE = new BigInteger(String.valueOf( e ));
         BigInteger multiple = new BigInteger(String.valueOf((this.p - 1) * (this.q - 1)));
 
@@ -92,16 +90,18 @@ public class Rsa {
 //        }
     }
 
-    public String decrypt(String toDecrypt) {
-        StringBuilder str = new StringBuilder("system");
+    public String decrypt(String toDecrypt, long n) {
+        StringBuilder str = new StringBuilder("");
 
         String[] codedLetters = toDecrypt.split(",");
 
-        for (int i = 0; i < codedLetters.length; i++) {
-            long codedLetter = Long.parseLong(codedLetters[i]);
-
-            char character = (char) (Math.pow(codedLetter, this.d) % this.n);
-            str.insert(i, character);
+        for (String letter : codedLetters) {
+            long codedLetter = Long.parseLong(letter);
+            System.out.println(codedLetter);
+            long character = (long) (Math.pow(codedLetter, this.d))% n;
+            System.out.println(character);
+            str.append((char) (character));
+            System.out.println(str.toString());
         }
 
         return str.toString();

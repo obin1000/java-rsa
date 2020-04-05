@@ -61,8 +61,8 @@ public class Decode extends JPanel {
         Dlab.setText(Long.toString(value));
     }
 
-    public void showCM(long value) {
-        MessageUnencrypted.setText(Long.toString(value));
+    public void showCM(String value) {
+        MessageUnencrypted.setText(value);
     }
 
 
@@ -89,22 +89,21 @@ public class Decode extends JPanel {
             JOptionPane.showMessageDialog(this, "E cannot be smaller than 2");
             return;
         }
-        rsa.calcD(N,E);
+        rsa.calcD(N, E);
         showD(rsa.getD());
     }
 
     public void CMButtonPressed() {
-        long C = 0;
+        String C;
+        long N;
+
+        N = Long.parseLong(Ninput.getText());
         try {
-            C = Long.parseLong(Cinput.getText());
+            C = Cinput.getText();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Invalid C provided");
             return;
         }
-        if (C < 2) {
-            JOptionPane.showMessageDialog(this, "C cannot be smaller than 2");
-            return;
-        }
-        showCM(C);
+        showCM(rsa.decrypt(C,N));
     }
 }
