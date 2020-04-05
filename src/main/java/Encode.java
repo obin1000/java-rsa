@@ -35,6 +35,7 @@ public class Encode extends JPanel {
         JLabel Elab =  new JLabel("E is: ");
         Evalue = new JLabel("0");
 
+        JLabel Mlab = new JLabel("Give me a message: ");
         Minput = new JTextField("Hello");
         JButton MButton = new JButton("Step 3: Encrypt M");
         JLabel MAfterEnc = new JLabel("Message after encryption is: ");
@@ -61,6 +62,7 @@ public class Encode extends JPanel {
         add(EButton);
         add(Elab);
         add(Evalue);
+        add(Mlab);
         add(Minput);
         add(MButton);
         add(MAfterEnc);

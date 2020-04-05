@@ -28,7 +28,7 @@ public class Decode extends JPanel {
         Dlab = new JLabel("0");
 
         JLabel Clab = new JLabel("Give me a message: ");
-        Cinput = new JTextField("123");
+        Cinput = new JTextField("Hello");
         JButton CButton = new JButton("Step 2: Decode M");
         JLabel CMessageAfter = new JLabel("Message after decryption is: ");
         MessageUnencrypted = new JTextField("0");
