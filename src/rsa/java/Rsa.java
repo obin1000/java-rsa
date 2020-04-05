@@ -15,7 +15,9 @@ public class Rsa {
         return q;
     }
 
-    public void calcPQ(long n) {
+    public long calcPQ(long n) {
+        long startTime = System.nanoTime();
+
         long biggestQ = (long) Math.pow(n, 2);
         long p = 2;
 
@@ -28,11 +30,15 @@ public class Rsa {
                 if (checkPrime(q)) {
                     Rsa.q = q;
                     Rsa.p = p;
+
+                    long endTime = System.nanoTime();
+                    return (endTime - startTime);
                 }
-                return;
             }
             p = nextPrime(p);
+            //System.out.println("checked p = " + p);
         }
+        return 0;
     }
 
     // Function to get nextPrimeNumber
