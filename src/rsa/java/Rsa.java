@@ -75,7 +75,7 @@ public class Rsa {
 
     public void calcD(long n, long e) {
         calcPQ(n);
-        BigInteger bigE = new BigInteger(String.valueOf( e ));
+        BigInteger bigE = new BigInteger(String.valueOf(e));
         BigInteger multiple = new BigInteger(String.valueOf((this.p - 1) * (this.q - 1)));
 
         this.d = Long.parseLong(bigE.modInverse(multiple).toString());
@@ -91,33 +91,33 @@ public class Rsa {
     }
 
     public String decrypt(String toDecrypt, long n) {
+        toDecrypt = toDecrypt.replace(" ", "");
         StringBuilder str = new StringBuilder("");
 
         String[] codedLetters = toDecrypt.split(",");
 
         for (String letter : codedLetters) {
-            long codedLetter = Long.parseLong(letter);
-            System.out.println(codedLetter);
-            long character = (long) (Math.pow(codedLetter, this.d))% n;
-            System.out.println(character);
+            BigInteger e = new BigInteger(letter);
+            BigInteger d = new BigInteger(String.valueOf(this.d));
+            BigInteger bigN = new BigInteger(String.valueOf(n));
+            BigInteger c = e.modPow(d, bigN);
+
+            int character = Integer.parseInt(String.valueOf(c));
             str.append((char) (character));
-            System.out.println(str.toString());
         }
 
         return str.toString();
     }
 
-    public String encrypt(String toEncrypt){
+    public String encrypt(String toEncrypt) {
         String encrypted = null;
 
-        for(int i = 0; i < toEncrypt.length(); i++)
-        {
+        for (int i = 0; i < toEncrypt.length(); i++) {
             char letter = toEncrypt.charAt(i);
 
         }
-    return encrypted;
+        return encrypted;
     }
-
 
 
     private static long gcd(long a, long b) {
@@ -139,4 +139,5 @@ public class Rsa {
 
         return b.isProbablePrime(1);
     }
+
 }
