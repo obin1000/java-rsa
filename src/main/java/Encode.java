@@ -1,14 +1,18 @@
 package main.java;
 
+import rsa.java.Rsa;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
 
 public class Encode extends JPanel {
 
     private JButton NButton;
-    private JLabel P, Q, PQTime;
+    private JLabel Plab, Qlab, PQTime;
     private JTextField NInput;
+
+    private long N, P, Q = 0;
 
     public Encode(){
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -17,44 +21,53 @@ public class Encode extends JPanel {
         NInput = new JTextField();
         NButton = new JButton("Send N");
         JLabel Pis = new JLabel("P is");
-        P = new JLabel("0");
+        Plab = new JLabel("0");
         JLabel Qis = new JLabel("Q is");
-        Q = new JLabel("0");
-        JLabel PQTimeLabel = new JLabel("Amount of time busy finding p and q:");
+        Qlab = new JLabel("0");
+        JLabel PQTimeLabel = new JLabel("Amount of time busy finding p and q (Nanoseconds):");
         PQTime = new JLabel("0");
 
-
+        NInput.setMaximumSize(new Dimension(99999999, 20));
         NButton.addActionListener(actionEvent -> NButtonPressed());
         NLabel.setLabelFor(NInput);
-        Pis.setLabelFor(P);
-        Qis.setLabelFor(Q);
+        Pis.setLabelFor(Plab);
+        Qis.setLabelFor(Qlab);
         PQTimeLabel.setLabelFor(PQTime);
 
-        this.add(title);
-        this.add(NLabel);
-        this.add(NInput);
-        this.add(NButton);
-        this.add(Pis);
-        this.add(P);
-        this.add(Qis);
-        this.add(Q);
-        this.add(PQTime);
+        add(title);
+        add(NLabel);
+        add(NInput);
+        add(NButton);
+        add(Pis);
+        add(Plab);
+        add(Qis);
+        add(Qlab);
+        add(PQTimeLabel);
+        add(PQTime);
     }
 
     public void showP(long value){
-        P.setText(Long.toString(value));
+        Plab.setText(Long.toString(value));
     }
     public void showQ(long value){
-        Q.setText(Long.toString(value));
+        Qlab.setText(Long.toString(value));
     }
 
-    public void showPQTime(int value){
+    public void showPQTime(long value){
         PQTime.setText(Long.toString(value));
     }
     public void NButtonPressed(){
-        long N = Long.parseLong(NInput.getText());
-        showP(N);
-        showQ(N);
-        showPQTime(420);
+        N = Long.parseLong(NInput.getText());
+        if (N == 0){
+            JOptionPane.showMessageDialog(this,"N Cannot be 0");
+            return;
+        }
+
+        Rsa rsa = new Rsa();
+        showPQTime(rsa.calcPQ(N));
+        P = rsa.getP();
+        Q = rsa.getQ();
+        showP(P);
+        showQ(Q);
     }
 }
