@@ -69,6 +69,10 @@ public class Rsa {
 
     }
 
+    public boolean validateE(long n, long e){
+        return gcd(n, e) == 1;
+    }
+
     public void calcD(long n, long e){
         calcPQ(n);
         long multiple = (this.p - 1) * (this.q - 1);
