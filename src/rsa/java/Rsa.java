@@ -8,6 +8,7 @@ public class Rsa {
     private long q;
     private long e;
     private long d;
+    private long n;
 
     public long getP() {
         return p;
@@ -54,36 +55,52 @@ public class Rsa {
     public void calcE(long startAt) {
         long multiple = (this.p - 1) * (this.q - 1);
 
-        if (startAt > multiple){
+        if (startAt > multiple) {
             startAt = 2;
         }
 
         while (gcd(multiple, startAt) != 1) {
             startAt++;
         }
-        if (startAt > multiple){
+        if (startAt > multiple) {
             calcE(startAt);
-        } else{
+        } else {
             this.e = startAt;
         }
 
     }
 
-    public boolean validateE(long n, long e){
+    public boolean validateE(long n, long e) {
         return gcd(n, e) == 1;
     }
 
-    public void calcD(long n, long e){
+    public void calcD(long n, long e) {
         calcPQ(n);
+        this.n = n;
         long multiple = (this.p - 1) * (this.q - 1);
 
         for (long d = 0; d < multiple; d++) {
             long comparator = d * e;
-            if (comparator % multiple == 1){
+            if (comparator % multiple == 1) {
                 this.d = d;
                 return;
             }
         }
+    }
+
+    public String decrypt(String toDecrypt) {
+        StringBuilder str = new StringBuilder("system");
+
+        String[] codedLetters = toDecrypt.split(",");
+
+        for (int i = 0; i < codedLetters.length; i++) {
+            long codedLetter = Long.parseLong(codedLetters[i]);
+
+            char character = (char) (Math.pow(codedLetter, this.d) % this.n);
+            str.insert(i, character);
+        }
+
+        return str.toString();
     }
 
 //    public String encrypt(String toEncrypt){
@@ -97,10 +114,8 @@ public class Rsa {
 //        }
 //    return encrypted;
 //    }
+
 //
-//    private static int letterToNumber(char c) {
-//        return  c^64;
-//    }
 
     private static long gcd(long a, long b) {
         BigInteger b1 = new BigInteger(String.valueOf(a));
