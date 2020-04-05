@@ -10,15 +10,17 @@ public class Encode extends JPanel {
 
     private JLabel Plab, Qlab, PQTime, Evalue, Mvalue;
     private JTextField NInput, Minput;
-
-    private long N, P, Q, E = 0;
+    private Rsa rsa;
+    private long lastE = 2;
 
     public Encode(){
+        rsa = new Rsa();
+
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JLabel title = new JLabel("Encode");
         JLabel NLabel = new JLabel("Give me the N:");
         NInput = new JTextField("123");
-        JButton NButton = new JButton("Step 1: Send N");
+        JButton NButton = new JButton("Step 1: Generate P and Q");
         JLabel Pis = new JLabel("P is");
         Plab = new JLabel("0");
         JLabel Qis = new JLabel("Q is");
@@ -81,6 +83,7 @@ public class Encode extends JPanel {
         Mvalue.setText(Long.toString(value));
     }
     public void NButtonPressed(){
+        long N = 0;
         try {
             N = Long.parseLong(NInput.getText());
         }catch (Exception e){
@@ -92,16 +95,16 @@ public class Encode extends JPanel {
             return;
         }
 
-        Rsa rsa = new Rsa();
+
         showPQTime(rsa.calcPQ(N));
-        P = rsa.getP();
-        Q = rsa.getQ();
-        showP(P);
-        showQ(Q);
+        showP(rsa.getP());
+        showQ(rsa.getQ());
     }
 
     public void EButtonPressed(){
-        showE(123);
+        rsa.calcE(lastE + 1);
+        lastE = rsa.getE();
+        showE(lastE);
     }
 
     public void MButtonPressed(){
