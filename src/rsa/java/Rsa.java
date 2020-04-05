@@ -77,15 +77,19 @@ public class Rsa {
     public void calcD(long n, long e) {
         calcPQ(n);
         this.n = n;
-        long multiple = (this.p - 1) * (this.q - 1);
+        BigInteger bigE = new BigInteger(String.valueOf( e ));
+        BigInteger multiple = new BigInteger(String.valueOf((this.p - 1) * (this.q - 1)));
 
-        for (long d = 0; d < multiple; d++) {
-            long comparator = d * e;
-            if (comparator % multiple == 1) {
-                this.d = d;
-                return;
-            }
-        }
+        this.d = Long.parseLong(bigE.modInverse(multiple).toString());
+
+//        for (long d = 0; d < multiple; d++) {
+//            System.out.println(d);
+//            long comparator = d * e;
+//            if (comparator % multiple == 1) {
+//                this.d = d;
+//                return;
+//            }
+//        }
     }
 
     public String decrypt(String toDecrypt) {
@@ -103,19 +107,18 @@ public class Rsa {
         return str.toString();
     }
 
-//    public String encrypt(String toEncrypt){
-//        String encrypted = null;
-//
-//        for(int i = 0; i < toEncrypt.length(); i++)
-//        {
-//            char letter = toEncrypt.charAt(i);
-//            int alphabeticNumber = letterToNumber(letter);
-//
-//        }
-//    return encrypted;
-//    }
+    public String encrypt(String toEncrypt){
+        String encrypted = null;
 
-//
+        for(int i = 0; i < toEncrypt.length(); i++)
+        {
+            char letter = toEncrypt.charAt(i);
+
+        }
+    return encrypted;
+    }
+
+
 
     private static long gcd(long a, long b) {
         BigInteger b1 = new BigInteger(String.valueOf(a));
