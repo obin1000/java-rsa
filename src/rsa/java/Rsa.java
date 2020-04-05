@@ -70,11 +70,12 @@ public class Rsa {
     }
 
     public boolean validateE(long n, long e) {
-        return gcd(n, e) == 1;
+        calcPQ(n);
+        long multiple = (this.p - 1) * (this.q - 1);
+        return gcd(multiple, e) == 1;
     }
 
     public void calcD(long n, long e) {
-        calcPQ(n);
         BigInteger bigE = new BigInteger(String.valueOf(e));
         BigInteger multiple = new BigInteger(String.valueOf((this.p - 1) * (this.q - 1)));
 
@@ -110,13 +111,20 @@ public class Rsa {
     }
 
     public String encrypt(String toEncrypt) {
-        String encrypted = null;
+        StringBuilder str = new StringBuilder("");
+        BigInteger n = new BigInteger(String.valueOf(this.p * this.q));
 
         for (int i = 0; i < toEncrypt.length(); i++) {
-            char letter = toEncrypt.charAt(i);
+            int letterValue = (int) (toEncrypt.charAt(i));
+            BigInteger value = new BigInteger(String.valueOf(letterValue));
+            BigInteger e = new BigInteger(String.valueOf(this.e));
+            BigInteger c = value.modPow(e, n);
+            str.append(c);
+            str.append(",");
 
         }
-        return encrypted;
+        str.deleteCharAt( str.length() - 1 );
+        return str.toString();
     }
 
 

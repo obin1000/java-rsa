@@ -31,7 +31,7 @@ public class Encode extends JPanel {
         JLabel PQTimeLabel = new JLabel("Amount of time busy finding p and q (Nanoseconds):");
         PQTime = new JLabel("0");
 
-        JButton EButton = new JButton("Step 2: Generate an E");
+        JButton EButton = new JButton("Step 2: Generate an E (Press again for another)");
         JLabel Elab =  new JLabel("E is: ");
         Evalue = new JLabel("0");
 
@@ -84,8 +84,8 @@ public class Encode extends JPanel {
         Evalue.setText(Long.toString(value));
     }
 
-    public void showM(long value){
-        MessageEncrypted.setText(Long.toString(value));
+    public void showM(String value){
+        MessageEncrypted.setText(value);
     }
     public void NButtonPressed(){
         long N = 0;
@@ -113,6 +113,14 @@ public class Encode extends JPanel {
     }
 
     public void MButtonPressed(){
-        showM(69);
+        String C;
+
+        try {
+            C = Minput.getText();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Invalid C provided");
+            return;
+        }
+        showM(rsa.encrypt(C));
     }
 }

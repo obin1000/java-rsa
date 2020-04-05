@@ -89,6 +89,11 @@ public class Decode extends JPanel {
             JOptionPane.showMessageDialog(this, "E cannot be smaller than 2");
             return;
         }
+        if (!rsa.validateE(N,E)) {
+            JOptionPane.showMessageDialog(this, "E is not valid");
+            return;
+        }
+
         rsa.calcD(N, E);
         showD(rsa.getD());
     }
