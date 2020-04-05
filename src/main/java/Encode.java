@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class Encode extends JPanel {
 
-    private JLabel Plab, Qlab, PQTime, Evalue, Mvalue;
-    private JTextField NInput, Minput;
+    private JLabel Plab, Qlab, PQTime, Evalue;
+    private JTextField NInput, Minput, MessageEncrypted;
     private Rsa rsa;
     private long lastE = 2;
 
@@ -38,7 +38,7 @@ public class Encode extends JPanel {
         Minput = new JTextField("Hello");
         JButton MButton = new JButton("Step 3: Encrypt M");
         JLabel MAfterEnc = new JLabel("Message after encryption is: ");
-        Mvalue = new JLabel("0");
+        MessageEncrypted = new JTextField("0");
 
 
         NInput.setMaximumSize(new Dimension(99999999, 20));
@@ -64,7 +64,7 @@ public class Encode extends JPanel {
         add(Minput);
         add(MButton);
         add(MAfterEnc);
-        add(Mvalue);
+        add(MessageEncrypted);
     }
 
     public void showP(long value){
@@ -83,7 +83,7 @@ public class Encode extends JPanel {
     }
 
     public void showM(long value){
-        Mvalue.setText(Long.toString(value));
+        MessageEncrypted.setText(Long.toString(value));
     }
     public void NButtonPressed(){
         long N = 0;

@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class Decode extends JPanel {
 
-    private JTextField Ninput, Einput, Cinput;
-    private JLabel Dlab, Clab;
+    private JTextField Ninput, Einput, Cinput, MessageUnencrypted;
+    private JLabel Dlab;
 
 
     public Decode() {
@@ -22,16 +22,16 @@ public class Decode extends JPanel {
         JLabel Dis = new JLabel("d is: ");
         Dlab = new JLabel("0");
 
+        JLabel Clab = new JLabel("Give me a message: ");
         Cinput = new JTextField("123");
         JButton CButton = new JButton("Step 2: Decode M");
         JLabel CMessageAfter = new JLabel("Message after decryption is: ");
-        Clab = new JLabel("0");
+        MessageUnencrypted = new JTextField("0");
 
 
         Ninput.setMaximumSize(new Dimension(99999999, 20));
         Einput.setMaximumSize(new Dimension(99999999, 20));
-        Cinput.setMaximumSize(new Dimension(99999999, 20));
-
+        Cinput.setMaximumSize(new Dimension(99999999, 200));
 
         NEButton.addActionListener(actionEvent -> NEButtonPressed());
         CButton.addActionListener(actionEvent -> CMButtonPressed());
@@ -45,10 +45,11 @@ public class Decode extends JPanel {
         add(NEButton);
         add(Dis);
         add(Dlab);
+        add(Clab);
         add(Cinput);
         add(CButton);
         add(CMessageAfter);
-        add(Clab);
+        add(MessageUnencrypted);
     }
 
     public void showD(long value) {
@@ -56,7 +57,7 @@ public class Decode extends JPanel {
     }
 
     public void showCM(long value) {
-        Clab.setText(Long.toString(value));
+        MessageUnencrypted.setText(Long.toString(value));
     }
 
 
@@ -98,6 +99,6 @@ public class Decode extends JPanel {
             JOptionPane.showMessageDialog(this, "C cannot be smaller than 2");
             return;
         }
-
+        showCM(C);
     }
 }
