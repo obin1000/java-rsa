@@ -1,7 +1,5 @@
 package main.java;
 
-import rsa.java.Rsa;
-
 class Main {
 
     public static void main(String[] args) {

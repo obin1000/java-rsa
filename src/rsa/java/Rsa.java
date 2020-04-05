@@ -7,6 +7,7 @@ public class Rsa {
     private long p;
     private long q;
     private long e;
+    private long d;
 
     public long getP() {
         return p;
@@ -19,6 +20,11 @@ public class Rsa {
     public long getE() {
         return e;
     }
+
+    public long getD() {
+        return d;
+    }
+
 
     public long calcPQ(long n) {
         long startTime = System.nanoTime();
@@ -41,7 +47,6 @@ public class Rsa {
                 }
             }
             p = nextPrime(p);
-            //System.out.println("checked p = " + p);
         }
         return 0;
     }
@@ -49,11 +54,49 @@ public class Rsa {
     public void calcE(long startAt) {
         long multiple = (this.p - 1) * (this.q - 1);
 
+        if (startAt > multiple){
+            startAt = 2;
+        }
+
         while (gcd(multiple, startAt) != 1) {
             startAt++;
         }
-        this.e = startAt;
+        if (startAt > multiple){
+            calcE(startAt);
+        } else{
+            this.e = startAt;
+        }
+
     }
+
+    public void calcD(long n, long e){
+        calcPQ(n);
+        long multiple = (this.p - 1) * (this.q - 1);
+
+        for (long d = 0; d < multiple; d++) {
+            long comparator = d * e;
+            if (comparator % multiple == 1){
+                this.d = d;
+                return;
+            }
+        }
+    }
+
+//    public String encrypt(String toEncrypt){
+//        String encrypted = null;
+//
+//        for(int i = 0; i < toEncrypt.length(); i++)
+//        {
+//            char letter = toEncrypt.charAt(i);
+//            int alphabeticNumber = letterToNumber(letter);
+//
+//        }
+//    return encrypted;
+//    }
+//
+//    private static int letterToNumber(char c) {
+//        return  c^64;
+//    }
 
     private static long gcd(long a, long b) {
         BigInteger b1 = new BigInteger(String.valueOf(a));
