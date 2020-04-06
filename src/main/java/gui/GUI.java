@@ -1,7 +1,6 @@
-package main.java;
+package main.java.gui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GUI {
     private int width = 800;

@@ -1,6 +1,6 @@
-package main.java;
+package main.java.gui;
 
-import rsa.java.Rsa;
+import main.java.rsa.Rsa;
 
 import javax.swing.*;
 import java.awt.*;

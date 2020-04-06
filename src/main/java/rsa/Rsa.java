@@ -1,4 +1,4 @@
-package rsa.java;
+package main.java.rsa;
 
 import java.math.BigInteger;
 

@@ -1,5 +1,7 @@
 package main.java;
 
+import main.java.gui.GUI;
+
 class Main {
 
     public static void main(String[] args) {
