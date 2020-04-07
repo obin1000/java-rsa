@@ -17,6 +17,7 @@ public class Encode extends JPanel {
         rsa = new Rsa();
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
         JLabel title = new JLabel("Encode");
         JLabel NLabel = new JLabel("Give me the N:");
         NInput = new JTextField("123");
@@ -44,6 +45,8 @@ public class Encode extends JPanel {
 
         NInput.setMaximumSize(new Dimension(99999999, 20));
         Minput.setMaximumSize(new Dimension(99999999, 20));
+        MessageEncrypted.setMaximumSize(new Dimension(99999999, 20));
+
 
         NButton.addActionListener(actionEvent -> NButtonPressed());
         EButton.addActionListener(actionEvent -> EButtonPressed());

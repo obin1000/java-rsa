@@ -20,6 +20,7 @@ public class GUI {
         splitpane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, encode, decode);
         splitpane.setDividerLocation(width/2);
 
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // add panel
         frame.add(splitpane);
 

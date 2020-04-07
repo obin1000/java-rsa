@@ -27,8 +27,8 @@ public class Decode extends JPanel {
         JLabel Dis = new JLabel("d is: ");
         Dlab = new JLabel("0");
 
-        JLabel Clab = new JLabel("Give me a message: ");
-        Cinput = new JTextField("Hello");
+        JLabel Clab = new JLabel("Give me an encrypted message: ");
+        Cinput = new JTextField("66,53,69,69,117");
         JButton CButton = new JButton("Step 2: Decode M");
         JLabel CMessageAfter = new JLabel("Message after decryption is: ");
         MessageUnencrypted = new JTextField("0");
@@ -36,7 +36,8 @@ public class Decode extends JPanel {
 
         Ninput.setMaximumSize(new Dimension(99999999, 20));
         Einput.setMaximumSize(new Dimension(99999999, 20));
-        Cinput.setMaximumSize(new Dimension(99999999, 200));
+        Cinput.setMaximumSize(new Dimension(99999999, 20));
+        MessageUnencrypted.setMaximumSize(new Dimension(99999999, 20));
 
         NEButton.addActionListener(actionEvent -> NEButtonPressed());
         CButton.addActionListener(actionEvent -> CMButtonPressed());
