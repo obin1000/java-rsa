@@ -22,7 +22,7 @@ public class Decode extends JPanel {
         JLabel Nlab = new JLabel("Give me the N:");
         Ninput = new JTextField("123");
         JLabel Elab = new JLabel("Give me the E:");
-        Einput = new JTextField("123");
+        Einput = new JTextField("3");
         JButton NEButton = new JButton("Step 1: Generate D");
         JLabel Dis = new JLabel("d is: ");
         Dlab = new JLabel("0");

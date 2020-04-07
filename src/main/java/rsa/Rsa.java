@@ -25,28 +25,29 @@ public class Rsa {
         return d;
     }
 
-
     public long calcPQ(long n) {
-        long startTime = System.nanoTime();
+        return calcPQ(BigInteger.valueOf(n));
+    }
 
-        long biggestQ = (long) Math.pow(n, 2);
-        long p = 2;
 
-        while (p < biggestQ) {
+    public long calcPQ(BigInteger n) {
+        BigInteger q, p = BigInteger.valueOf(2);
+        long startTime = System.currentTimeMillis();
 
-            if (n % p == 0) {
+        while (p.compareTo(n) < 0) {
+            if (n.mod(p).getLowestSetBit() == -1) {
 
-                long q = n / p;
+                q = n.divide(p);
 
-                if (checkPrime(q)) {
-                    this.q = q;
-                    this.p = p;
+                if (q.isProbablePrime(1)) {
+                    this.q = q.longValue();
+                    this.p = p.longValue();
 
-                    long endTime = System.nanoTime();
+                    long endTime = System.currentTimeMillis();
                     return (endTime - startTime);
                 }
             }
-            p = nextPrime(p);
+            p = p.nextProbablePrime();
         }
         return 0;
     }
@@ -148,5 +149,6 @@ public class Rsa {
 
         return b.isProbablePrime(1);
     }
+
 
 }
