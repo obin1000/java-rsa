@@ -29,7 +29,7 @@ public class Encode extends JPanel {
         JLabel Qis = new JLabel("Q is");
         Qlab = new JLabel("0");
 
-        JLabel PQTimeLabel = new JLabel("Amount of time busy finding p and q (Nanoseconds):");
+        JLabel PQTimeLabel = new JLabel("Amount of time busy finding p and q (Milliseconds):");
         PQTime = new JLabel("0");
 
         JButton EButton = new JButton("Step 2: Generate an E (Press again for another)");
