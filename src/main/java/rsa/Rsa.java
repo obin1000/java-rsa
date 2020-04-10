@@ -77,7 +77,6 @@ public class Rsa {
     }
 
     public void calcD(long n, long e) {
-        calcPQ(n);
         BigInteger bigE = new BigInteger(String.valueOf(e));
         BigInteger multiple = new BigInteger(String.valueOf((this.p - 1) * (this.q - 1)));
 
